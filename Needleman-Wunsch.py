@@ -80,24 +80,24 @@ def readLeft(matrix, seqA, seqB):
     alignedB.append(matrix[i][0])
     while i > 2 and j > 2:
         newFieldValue = min(matrix[i][j - 1], matrix[i - 1][j], matrix[i - 1][j - 1])
-        print("Krok ", maxI - i, "score: ", score)
+        print("Step ", maxI - i, "score: ", score)
         print(matrix[i][j])
         if newFieldValue == matrix[i][j - 1]:
             alignedB.append(matrix[0][0])
             alignedA.append(matrix[0][j-1])
             j = j - 1
-            print("ide na lewo")
+            print("I'm going left")
         elif newFieldValue == matrix[i - 1][j - 1]:
             alignedB.append(matrix[i-1][0])
             alignedA.append(matrix[0][j-1])
             i = i - 1
             j = j - 1
-            print("Ide na ukos")
+            print("I'm going diagonally")
         elif newFieldValue == matrix[i - 1][j]:
             alignedB.append(matrix[i-1][0])
             alignedA.append(matrix[0][0])
             i = i - 1
-            print("ide do gory")
+            print("I'm going up")
         score = score + newFieldValue
     return alignedA, alignedB, maxScore, score
 
@@ -117,24 +117,24 @@ def readUp(matrix, seqA, seqB):
     alignedB.append(matrix[i][0])
     while i > 2 and j > 2:
         newFieldValue = min(matrix[i][j - 1], matrix[i - 1][j], matrix[i - 1][j - 1])
-        print("Krok ", maxI - i, "score: ", score)
+        print("Step ", maxI - i, "score: ", score)
         print(matrix[i][j])
         if newFieldValue == matrix[i - 1][j]:
             alignedB.append(matrix[i - 1][0])
             alignedA.append(matrix[0][0])
             i = i - 1
-            print("ide do gory")
+            print("I'm going up")
         elif newFieldValue == matrix[i - 1][j - 1]:
             alignedB.append(matrix[i - 1][0])
             alignedA.append(matrix[0][j - 1])
             i = i - 1
             j = j - 1
-            print("Ide na ukos")
+            print("I'm going diagonally")
         elif newFieldValue == matrix[i][j - 1]:
             alignedB.append(matrix[0][0])
             alignedA.append(matrix[0][j - 1])
             j = j - 1
-        print("ide na lewo")
+        print("I'm going left")
     return alignedA, alignedB, maxScore, score
 
 
@@ -145,13 +145,13 @@ def countMatrix(alignedA, alignedB):
         if alignedA[i] == alignedB[i]:
             score = score + 1
     percentage2 = 100 * score / len(alignedA)
-    print("Percentage2: ", 100 * score / len(alignedA))
+    print("Percentage: ", 100 * score / len(alignedA))
     return percentage2
 
 
 def saveExperiment(seqA, seqB, alignedA, alignedB, percentage2):
-    fileName = input("Podaj nazwe pilku: ")
-    list = [" Sequence 1: ", seqA, "\n", " Sequence 2: ", seqB, "\n", " Percentage2 (alignment-derived): ", str(percentage2), "\n", "Alignment: ", "\n",
+    fileName = input("Enter the file name: ")
+    list = [" Sequence 1: ", seqA, "\n", " Sequence 2: ", seqB, "\n", " Percentage (alignment-derived): ", str(percentage2), "\n", "Alignment: ", "\n",
             str(alignedA), "\n", str(alignedB)]
     file = open(fileName, "w")
     file.writelines(list)
