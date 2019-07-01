@@ -25,6 +25,7 @@ def printMatrix(matrix):
     for i in range(len(matrix)):
         print(matrix[i])
 
+#comment
 
 def fillMatrix(matrix, seqA, seqB):
     for i in range(len(seqB)):
