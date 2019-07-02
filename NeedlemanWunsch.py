@@ -39,6 +39,9 @@ def fillMatrix(matrix, seqA, seqB):
     return matrix
 
 
+def reverse(word):
+    return word[::-1]
+
 def readMatrix(matrix, seqA, seqB):
     if len(seqA) > len(seqB):
         leftWay = True
@@ -46,14 +49,8 @@ def readMatrix(matrix, seqA, seqB):
         leftWay = False
     alignedA, alignedB = align(matrix, seqA, seqB, leftWay)
     print(' ')
-    lastA = len(seqA) - 1
-    lastB = len(seqB) - 1
-    if seqA[lastA] != '-' and seqA[lastA] != '0' and seqB[lastB] != '-' and seqB[lastB] != '0':
-        alignedA = alignedA
-        alignedB = alignedB
-    else:
-        alignedA.remove(alignedA[lastA])
-        alignedB.remove(alignedA[lastB])
+    alignedA=reverse(alignedA)
+    alignedB = reverse(alignedB)
     print(alignedA)
     print(alignedB)
     return alignedA, alignedB
