@@ -1,6 +1,8 @@
 # ostatnia zmiana: 04.07, Marysia Hayder
 
 import os
+from enum import Enum
+
 
 
 def getSequence(number):
@@ -42,12 +44,15 @@ def fillMatrix(matrix, seqA, seqB):
 def reverse(word):
     return word[::-1]
 
+Way = Enum('Way', 'left up')
+
 def readMatrix(matrix, seqA, seqB):
+
     if len(seqA) > len(seqB):
-        leftWay = True
+        way=Way.left
     else:
-        leftWay = False
-    alignedA, alignedB = align(matrix, seqA, seqB, leftWay)
+        way = Way.up
+    alignedA, alignedB = align(matrix, seqA, seqB, way)
     print(' ')
     alignedA=reverse(alignedA)
     alignedB = reverse(alignedB)
@@ -56,7 +61,7 @@ def readMatrix(matrix, seqA, seqB):
     return alignedA, alignedB
 
 
-def align(matrix, seqA, seqB, leftWay):
+def align(matrix, seqA, seqB, way):
     maxI = len(seqB) + 1
     maxJ = len(seqA) + 1
     i = maxI
@@ -70,7 +75,7 @@ def align(matrix, seqA, seqB, leftWay):
         newFieldValue = min(matrix[i][j - 1], matrix[i - 1][j], matrix[i - 1][j - 1])
         print("Step ", maxI - i, "score: ", score)
         print(matrix[i][j])
-        if leftWay == True:
+        if way == Way.left:
             if newFieldValue == matrix[i][j - 1]:
                 alignedB.append(matrix[0][0])
                 alignedA.append(matrix[0][j - 1])
