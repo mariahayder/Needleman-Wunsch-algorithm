@@ -1,4 +1,4 @@
-# ostatnia zmiana: 02.07, Marysia Hayder
+# ostatnia zmiana: 04.07, Marysia Hayder
 
 import os
 
@@ -9,7 +9,7 @@ def getSequence(number):
 
 
 def createMatrix(seqA, seqB):
-    matrix = [[1000] * (max(len(seqA), len(seqB)) + 2) for i in range(max(len(seqA), len(seqB)) + 2)]
+    matrix = [['-'] * (max(len(seqA), len(seqB)) + 2) for i in range(max(len(seqA), len(seqB)) + 2)]
     for i in range(len(seqA)):
         matrix[0][i + 2] = seqA[i]
         matrix[1][i + 2] = i
