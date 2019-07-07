@@ -1,0 +1,6 @@
+ Sequence 1: ktabcduv
+ Sequence 2: abcd
+ Percentage (alignment-derived): 50.0
+Alignment: 
+['k', 't', 'a', 'b', 'c', 'd', 'u', 'v']
+['-', '-', 'a', 'b', 'c', 'd', '-', '-']
