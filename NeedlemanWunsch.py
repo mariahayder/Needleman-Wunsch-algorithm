@@ -5,6 +5,7 @@ from enum import Enum
 
 
 
+
 def getSequence(number):
     seq = input("Podaj sekwencje nr %d: " % number)
     return seq
@@ -68,8 +69,19 @@ def align(matrix, seqA, seqB, way):
     j = maxJ
     alignedA = []
     alignedB = []
-    alignedA.append(matrix[0][j])
-    alignedB.append(matrix[i][0])
+    if matrix[0][j] == matrix[i][0]:
+        alignedA.append(matrix[0][j])
+        alignedB.append(matrix[i][0])
+        finalInsertion=False
+    else:
+        if way==Way.left:
+            alignedB.append(matrix[0][0])
+            alignedA.append(matrix[0][j])
+            finalInsertion=True
+        else:
+            alignedB.append(matrix[i][0])
+            alignedA.append(matrix[0][0])
+            finalInsertion=True
     score = matrix[i][j]
     while i > 2 and j > 2:
         newFieldValue = min(matrix[i][j - 1], matrix[i - 1][j], matrix[i - 1][j - 1])
@@ -77,8 +89,11 @@ def align(matrix, seqA, seqB, way):
         print(matrix[i][j])
         if way == Way.left:
             if newFieldValue == matrix[i][j - 1]:
-                alignedB.append(matrix[0][0])
                 alignedA.append(matrix[0][j - 1])
+                if True == finalInsertion and matrix[0][j-1] == matrix[i][0]:
+                    alignedB.append(matrix[0][j-1])
+                else:
+                    alignedB.append(matrix[0][0])
                 j = j - 1
                 print("I'm going left")
             elif newFieldValue == matrix[i - 1][j - 1]:
@@ -95,7 +110,10 @@ def align(matrix, seqA, seqB, way):
         else:
             if newFieldValue == matrix[i - 1][j]:
                 alignedB.append(matrix[i - 1][0])
-                alignedA.append(matrix[0][0])
+                if True == finalInsertion and matrix[0][j] == matrix[i-1][0]:
+                    alignedA.append(matrix[0][j])
+                else:
+                    alignedA.append(matrix[0][0])
                 i = i - 1
                 print("I'm going up")
             elif newFieldValue == matrix[i - 1][j - 1]:
@@ -109,6 +127,18 @@ def align(matrix, seqA, seqB, way):
                 alignedA.append(matrix[0][j - 1])
                 j = j - 1
                 print("I'm going left")
+    if i > 1:
+        while j > 2:
+            alignedB.append(matrix[0][0])
+            alignedA.append(matrix[0][j - 1])
+            j = j - 1
+            print("I'm going left")
+    if j > 1:
+        while i > 2:
+            alignedB.append(matrix[i - 1][0])
+            alignedA.append(matrix[0][0])
+            i = i - 1
+            print("I'm going up")
     return alignedA, alignedB
 
 
@@ -123,10 +153,10 @@ def countMatrix(alignedA, alignedB):
     return percentage2
 
 
-def saveExperiment(seqA, seqB, alignedA, alignedB, percentage2):
+def saveExperiment(seqA, seqB, alignedA, alignedB, percentage):
     fileName = input("Enter the file name: ")
     list = [" Sequence 1: ", seqA, "\n", " Sequence 2: ", seqB, "\n", " Percentage (alignment-derived): ",
-            str(percentage2), "\n", "Alignment: ", "\n",
+            str(percentage), "\n", "Alignment: ", "\n",
             str(alignedA), "\n", str(alignedB)]
     file = open(fileName, "w")
     file.writelines(list)

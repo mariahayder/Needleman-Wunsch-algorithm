@@ -1,7 +1,6 @@
  Sequence 1: abcd
  Sequence 2: abcd
- Percentage1 (N-W score-derived): 100.0
- Percentage2 (alignment-derived): 100.0
+ Percentage (alignment-derived): 100.0
 Alignment: 
-['d', 'c', 'b', 'a']
-['d', 'c', 'b', 'a']
+['a', 'b', 'c', 'd']
+['a', 'b', 'c', 'd']
