@@ -1,6 +1,6 @@
-# ostatnia zmiana: 04.07, Marysia Hayder
+# last modification: 23.07, Marysia Hayder
 
-import os
+
 from enum import Enum
 
 
@@ -38,7 +38,7 @@ def fillMatrix(matrix, seqA, seqB):
                 diff = 1
             matrix[i + 2][j + 2] = min(matrix[i + 2 - 1][j + 2] + 1, matrix[i + 2][j + 2 - 1] + 1,
                                        matrix[i + 2 - 1][j + 2 - 1] + diff)
-    printMatrix(matrix)
+    #printMatrix(matrix)
     return matrix
 
 
@@ -85,8 +85,8 @@ def align(matrix, seqA, seqB, way):
     score = matrix[i][j]
     while i > 2 and j > 2:
         newFieldValue = min(matrix[i][j - 1], matrix[i - 1][j], matrix[i - 1][j - 1])
-        print("Step ", maxI - i, "score: ", score)
-        print(matrix[i][j])
+        #print("Step ", maxI - i, "score: ", score)
+       # print(matrix[i][j])
         if way == Way.left:
             if newFieldValue == matrix[i][j - 1]:
                 alignedA.append(matrix[0][j - 1])
@@ -95,18 +95,18 @@ def align(matrix, seqA, seqB, way):
                 else:
                     alignedB.append(matrix[0][0])
                 j = j - 1
-                print("I'm going left")
+               # print("I'm going left")
             elif newFieldValue == matrix[i - 1][j - 1]:
                 alignedB.append(matrix[i - 1][0])
                 alignedA.append(matrix[0][j - 1])
                 i = i - 1
                 j = j - 1
-                print("I'm going diagonally")
+                #print("I'm going diagonally")
             elif newFieldValue == matrix[i - 1][j]:
                 alignedB.append(matrix[i - 1][0])
                 alignedA.append(matrix[0][0])
                 i = i - 1
-                print("I'm going up")
+               # print("I'm going up")
         else:
             if newFieldValue == matrix[i - 1][j]:
                 alignedB.append(matrix[i - 1][0])
@@ -115,30 +115,30 @@ def align(matrix, seqA, seqB, way):
                 else:
                     alignedA.append(matrix[0][0])
                 i = i - 1
-                print("I'm going up")
+               # print("I'm going up")
             elif newFieldValue == matrix[i - 1][j - 1]:
                 alignedB.append(matrix[i - 1][0])
                 alignedA.append(matrix[0][j - 1])
                 i = i - 1
                 j = j - 1
-                print("I'm going diagonally")
+                #print("I'm going diagonally")
             elif newFieldValue == matrix[i][j - 1]:
                 alignedB.append(matrix[0][0])
                 alignedA.append(matrix[0][j - 1])
                 j = j - 1
-                print("I'm going left")
+                #print("I'm going left")
     if i > 1:
         while j > 2:
             alignedB.append(matrix[0][0])
             alignedA.append(matrix[0][j - 1])
             j = j - 1
-            print("I'm going left")
+           # print("I'm going left")
     if j > 1:
         while i > 2:
             alignedB.append(matrix[i - 1][0])
             alignedA.append(matrix[0][0])
             i = i - 1
-            print("I'm going up")
+            #print("I'm going up")
     return alignedA, alignedB
 
 
