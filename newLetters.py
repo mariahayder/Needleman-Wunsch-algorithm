@@ -60,7 +60,7 @@ def main():
             fileName.append(comparedLetters[j])
             fileName = str(fileName)
             percentage = work(comparedLetters[i], comparedLetters[j], fileName)
-            d = ws.cell(row=j+3, column=i + 3, value=percentage)
+            d = ws.cell(row=j+2, column=i + 3, value=percentage)
             wb.save('diff=1.xlsx')
     return 0
 
