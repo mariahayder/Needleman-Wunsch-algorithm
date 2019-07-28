@@ -3,8 +3,7 @@
 
 from enum import Enum
 
-
-
+DIV = 1.5
 
 def getSequence(number):
     seq = input("Podaj sekwencje nr %d: " % number)
@@ -36,7 +35,7 @@ def fillMatrix(matrix, seqA, seqB):
                 diff = 0
             else:
                 diff = 1
-            matrix[i + 2][j + 2] = min(matrix[i + 2 - 1][j + 2] + 1, matrix[i + 2][j + 2 - 1] + 1,
+            matrix[i + 2][j + 2] = min(matrix[i + 2 - 1][j + 2] + DIV, matrix[i + 2][j + 2 - 1] + DIV,
                                        matrix[i + 2 - 1][j + 2 - 1] + diff)
     #printMatrix(matrix)
     return matrix
